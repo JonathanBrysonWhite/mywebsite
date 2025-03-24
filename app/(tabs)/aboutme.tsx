@@ -4,6 +4,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { Button } from "@/components/Button";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import SkillsSection from "@/components/SkillsSection";
 
 export default function AboutMeScreen() {
   return (
@@ -38,12 +39,8 @@ export default function AboutMeScreen() {
       </View>
 
       {/* Skills Section */}
-      <View className="mt-8">
-        <ThemedText type="subtitle">Skills & Technologies</ThemedText>
-        <ThemedText className="text-gray-700 dark:text-gray-300">
-          React, React Native, Node.js, Docker, Kubernetes, DevOps, Cloud Infrastructure, IT Consulting
-        </ThemedText>
-      </View>
+      <ThemedText type="subtitle" style={styles.titleText}>Skills & Technologies</ThemedText>
+      <SkillsSection/>
 
       {/* Fun Facts Section */}
       <View className="mt-8">
@@ -67,6 +64,9 @@ export default function AboutMeScreen() {
 }
 
 const styles = StyleSheet.create({
+  titleText: {
+    marginBottom: 4
+  },
   gradientBackground: {
     position: 'absolute',
     width: '100%',
