@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 300,
     borderRadius: 150, // Correctly rounding the image
-    borderWidth: 5, // Adding border width for visibility
+    borderWidth: 5, // Adding border width for visibility,
     shadowColor: '#000',
     shadowOffset: { width: 4, height: 2 },
     shadowOpacity: 1.0, // Controls the shadow intensity

@@ -51,4 +51,4 @@ Join our community of developers creating universal apps.
 
 
 
-#todo - resume page, 
+#todo - resume page, testimonials
