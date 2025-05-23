@@ -47,6 +47,13 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
         }}
         />
+        <Tabs.Screen
+          name="resume"
+          options={{
+            title: 'Resume',
+            tabBarIcon: ({ color}) => <IconSymbol size={28} name="person.text.rectangle.fill" color={color} />
+          }}
+          />
     </Tabs>
   );
 }

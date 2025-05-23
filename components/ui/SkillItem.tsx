@@ -12,10 +12,10 @@ interface SkillItemProps {
 export default function SkillItem({ name, icon }: SkillItemProps) {
   const [showLabel, setShowLabel] = useState(false);
   const labelOpacity = useRef(new Animated.Value(0)).current;
-  const labelTranslateY = useRef(new Animated.Value(20)).current;
+  const labelTranslateY = useRef(new Animated.Value(40)).current;
   const { width } = useWindowDimensions();
   const size = width <= 600 ? 80 : width <= 1200 ? 100 : 175;
-  const scale = useRef(new Animated.Value(1)).current;
+  const itemTranslateY = useRef(new Animated.Value(0)).current;
 
   const showToolTip = () => {
     setShowLabel(true);
@@ -26,7 +26,7 @@ export default function SkillItem({ name, icon }: SkillItemProps) {
         useNativeDriver: true
       }),
       Animated.timing(labelTranslateY, {
-        toValue: 0,
+        toValue: 30,
         duration: 200,
         useNativeDriver: true
       })
@@ -42,7 +42,7 @@ export default function SkillItem({ name, icon }: SkillItemProps) {
         useNativeDriver: true
       }),
       Animated.timing(labelTranslateY, {
-        toValue: 20,
+        toValue: 40,
         duration: 200,
         useNativeDriver: true
       })
@@ -50,19 +50,19 @@ export default function SkillItem({ name, icon }: SkillItemProps) {
 
   }
   return (
-    <Animated.View style={ [styles.container, { transform: [{scale}]}]}>
+    <Animated.View style={ [styles.container, { transform: [{translateY: itemTranslateY}]}]}>
       {/* Skill Sphere */}
       <Pressable
         onPress={() => {
           showToolTip();
           Animated.sequence([
-            Animated.spring(scale, {
-              toValue: 1.15,
+            Animated.spring(itemTranslateY, {
+              toValue: -15,
               friction: 5,
               useNativeDriver: true
             }),
-            Animated.spring(scale, {
-              toValue: 1,
+            Animated.spring(itemTranslateY, {
+              toValue: 0,
               friction: 5,
               useNativeDriver: true
             })
@@ -72,9 +72,9 @@ export default function SkillItem({ name, icon }: SkillItemProps) {
         onHoverIn={
           () => {
             showToolTip();
-            Animated.spring(scale, {
-              toValue: 1.15,
-              friction: 3,
+            Animated.spring(itemTranslateY, {
+              toValue: -15,
+              friction: 5,
               useNativeDriver: true
             }).start();
           }
@@ -82,9 +82,9 @@ export default function SkillItem({ name, icon }: SkillItemProps) {
         onHoverOut={
           () => {
             hideToolTip();
-            Animated.spring(scale, {
-              toValue: 1,
-              friction: 3,
+            Animated.spring(itemTranslateY, {
+              toValue: 0,
+              friction: 5,
               useNativeDriver: true
             }).start()
           }
