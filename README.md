@@ -52,3 +52,4 @@ Join our community of developers creating universal apps.
 
 
 #todo - resume page, testimonials
+#todo - services on front page should link to dedicated services page

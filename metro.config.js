@@ -1,4 +1,5 @@
 const { getDefaultConfig } = require("expo/metro-config");
+const path = require('path');
 
 module.exports = (() => {
   const config = getDefaultConfig(__dirname);
@@ -7,6 +8,5 @@ module.exports = (() => {
   config.resolver.sourceExts.push("svg");
 
   config.transformer.babelTransformerPath = require.resolve("react-native-svg-transformer");
-
   return config;
 })();
