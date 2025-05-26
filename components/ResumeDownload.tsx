@@ -30,13 +30,18 @@ export function ResumeButton() {
       onPress={handlePress}
       style={{
         backgroundColor: '#1D3D47',
-        paddingVertical: 12,
-        paddingHorizontal: 20,
-        borderRadius: 8,
-        marginVertical: 16,
-        alignSelf: 'center',
+        padding: 10,
+        borderRadius: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 4, height: 2},
+        shadowOpacity: 0.4,
+        shadowRadius: 5,
+        width: 240,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        height: 45,
       }}>
-      <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16 }}>
+      <Text style={{ color: '#fff', fontWeight: 'bold', fontSize: 16, marginLeft: 'auto', marginRight: 'auto', marginTop: 'auto', marginBottom: 'auto' }}>
         📥 Download My Resume
       </Text>
     </Pressable>

@@ -5,6 +5,8 @@ import { Button } from "@/components/Button";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import SkillsSection from "@/components/SkillsSection";
+import { ResumeButton } from "@/components/ResumeDownload"
+import { ContactButton } from "@/components/ui/ContactButton";
 
 export default function AboutMeScreen() {
   return (
@@ -54,16 +56,20 @@ export default function AboutMeScreen() {
 
       {/* Call to Action */}
       <View className="mt-8 items-center">
-        <Link href="about:blank">
-          <Button label="Contact Me" />
-        </Link>
-        <Button label="Download Resume" variant="secondary" className="mt-4" onPress={() => {}} />
+        <View style={styles.contactButtonContainer}>
+          <ContactButton buttonText="📩 Contact Me"/>
+        </View>
+        <ResumeButton/>
       </View>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  contactButtonContainer: {
+    padding: 8,
+    alignItems: 'center'
+  },
   titleText: {
     marginBottom: 4
   },

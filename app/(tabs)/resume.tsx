@@ -9,7 +9,6 @@ import { ResumeButton } from '@/components/ResumeDownload';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Image } from 'react-native';
 
-
 export default function ResumeScreen() {
     const resumeUri = process.env.EXPO_PUBLIC_RESUME_URL!;
     const { width, height } = useWindowDimensions();
@@ -18,12 +17,14 @@ export default function ResumeScreen() {
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
       headerImage={
-                <LinearGradient
-                  colors={['#1D3D47', '#A1CEDC']}
-                  style={styles.gradientBackground}
-                  >
-                <Image source={require('@/assets/images/DoodleBob.webp')} style={styles.profileImage} />
-                </LinearGradient>
+        <LinearGradient
+          colors={['#1D3D47', '#A1CEDC']}
+          style={styles.gradientBackground}
+          >
+        <View style={styles.profileImage}>
+            <Image source={require('@/assets/images/workspace.jpg')} style={styles.profileImage}/>
+        </View>
+        </LinearGradient>
       }>
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">📄 My Resume </ThemedText>
@@ -59,16 +60,16 @@ const styles = StyleSheet.create({
     left: -35,
     position: 'absolute',
   },
-    gradientBackground: {
+  gradientBackground: {
     position: 'absolute',
     width: '100%',
     height: '100%',
   },
-    profileImage: {
+  profileImage: {
+    width: 200,
+    height: 200,
+    top: '10%',
     left: "20%",
-    width: 300, // Adjust as needed
-    height: 300, // Should be the same as width for a perfect circle
-    borderRadius: 125, // Half of width/height for a circular shape
     borderWidth: 2, // Optional: adds a subtle border
     borderColor: "#fff", // White border for contrast
     shadowColor: "#000",

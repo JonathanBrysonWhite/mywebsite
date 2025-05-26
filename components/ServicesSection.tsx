@@ -22,8 +22,8 @@ const services: {title: string, icon: MaterialIconName }[] = [
 ];
 
 export default function ServicesSection() {
-    const colorScheme = useColorScheme();
-    const isDarkMode = colorScheme === 'dark';
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
   return (
     <View style={styles.container}>
       <Text style={[styles.heading, isDarkMode && styles.headingDark]}>💼 Services I Offer</Text>

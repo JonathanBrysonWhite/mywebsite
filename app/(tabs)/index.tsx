@@ -5,6 +5,7 @@ import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { LinearGradient } from 'expo-linear-gradient';
 import ServicesSection from '@/components/ServicesSection';
+import { ContactButton } from '@/components/ui/ContactButton';
 
 export default function HomeScreen() {
   return (
@@ -43,9 +44,7 @@ export default function HomeScreen() {
       <ThemedView style={styles.ctaContainer}>
         <ThemedText type="subtitle">📩 Let's Work Together</ThemedText>
         <ThemedText>Contact me for a free consultation.</ThemedText>
-        <TouchableOpacity style={styles.contactButton} onPress={() => Linking.openURL('mailto:your@email.com')}>
-          <ThemedText style={styles.contactButtonText}>Get in Touch</ThemedText>
-        </TouchableOpacity>
+        <ContactButton buttonText="Get in Touch"/>
       </ThemedView>
       
     </ParallaxScrollView>
@@ -83,20 +82,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#A1CEDC',
     borderRadius: 8,
     margin: 16,
-  },
-  contactButton: {
-    marginTop: 8,
-    backgroundColor: '#1D3D47',
-    padding: 10,
-    borderRadius: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 4, height: 2},
-    shadowOpacity: 0.4,
-    shadowRadius: 5, 
-  },
-  contactButtonText: {
-    color: '#FFF',
-    fontWeight: 'bold',
   },
   profileImage: {
     left: "20%",
