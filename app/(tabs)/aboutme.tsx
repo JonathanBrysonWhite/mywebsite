@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import SkillsSection from "@/components/SkillsSection";
+import FunFactsSection from "@/components/FunFactsSection";
 import { ResumeButton } from "@/components/ResumeDownload"
 import { ContactButton } from "@/components/ui/ContactButton";
 
@@ -45,14 +46,7 @@ export default function AboutMeScreen() {
       <SkillsSection/>
 
       {/* Fun Facts Section */}
-      <View className="mt-8">
-        <ThemedText type="subtitle">Fun Facts</ThemedText>
-        <ThemedText className="text-gray-700 dark:text-gray-300">
-          - I love building cool front-end components 🎨  
-          - I enjoy DevOps automation ⚙️  
-          - Big fan of self-hosting and VPS setups 🚀  
-        </ThemedText>
-      </View>
+      <FunFactsSection/>
 
       {/* Call to Action */}
       <View className="mt-8 items-center">

@@ -51,5 +51,7 @@ Join our community of developers creating universal apps.
 
 
 
-#todo - resume page, testimonials
+#todo - portfolio, testimonials
 #todo - services on front page should link to dedicated services page
+#todo - blog page, with CRM system for blog posts behind auth
+#todo - skill items can link to portfolio items
