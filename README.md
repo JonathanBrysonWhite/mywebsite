@@ -50,6 +50,17 @@ Join our community of developers creating universal apps.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 
 
-
-#todo - resume page, testimonials
+#todo - replace all alerts w/ toast
+#todo - portfolio, testimonials
 #todo - services on front page should link to dedicated services page
+#todo - blog page, with CRM system for blog posts behind auth
+#todo - skill items can link to portfolio items
+
+#blog ideas - how to to recaptcha for this site
+#blog ideas - making of the skills component
+
+#todo remove localhost from google.com/re3captcha/admin
+#todo in ios keyboard should push up ui on text entry
+#todo look into zoho mail api
+#https://www.zoho.com/mail/help/api/post-send-an-email.html
+#look at spf record for brysonw.net

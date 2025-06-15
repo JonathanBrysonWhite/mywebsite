@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, Linking, Text, View } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -6,6 +6,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { LinearGradient } from 'expo-linear-gradient';
 import ServicesSection from '@/components/ServicesSection';
 import { ContactButton } from '@/components/ui/ContactButton';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
   return (
@@ -15,11 +16,13 @@ export default function HomeScreen() {
         <LinearGradient
           colors={['#1D3D47', '#A1CEDC']}
           style={styles.gradientBackground}
-          >
-        <Image source={require('@/assets/images/bryson-headshot.png')} style={styles.profileImage} />
+        >
+          <View style={styles.imageContainer}>
+            <Image source={require('@/assets/images/bryson-headshot.png')} style={styles.profileImage} />
+          </View>
         </LinearGradient>
       }>
-      
+
       {/* Intro Section */}
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Hi, I'm Bryson!</ThemedText>
@@ -35,8 +38,11 @@ export default function HomeScreen() {
       {/* Portfolio Preview */}
       <ThemedView style={styles.section}>
         <ThemedText type="subtitle">🚀 My Portfolio</ThemedText>
-        <TouchableOpacity onPress={() => Linking.openURL('https://github.com/yourgithub')}>
-          <ThemedText style={styles.link}>🔗 Check out my GitHub</ThemedText>
+        <TouchableOpacity
+          style={[styles.button]}
+          onPress={() => Linking.openURL('https://github.com/JonathanBrysonWhite')}
+        >
+          <Text style={styles.buttonText}>Check Out My Github! </Text>
         </TouchableOpacity>
       </ThemedView>
 
@@ -44,14 +50,30 @@ export default function HomeScreen() {
       <ThemedView style={styles.ctaContainer}>
         <ThemedText type="subtitle">📩 Let's Work Together</ThemedText>
         <ThemedText>Contact me for a free consultation.</ThemedText>
-        <ContactButton buttonText="Get in Touch"/>
+        <ContactButton buttonText="Get in Touch" />
       </ThemedView>
-      
+
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    width: 300,
+    height: 300,
+    borderRadius: 125,
+    borderColor: '#fff',
+    borderWidth: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 8,
+    left: '20%',
+    overflow: 'hidden', // Ensures child image is clipped
+  },
   gradientBackground: {
     position: 'absolute',
     width: '100%',
@@ -84,16 +106,20 @@ const styles = StyleSheet.create({
     margin: 16,
   },
   profileImage: {
-    left: "20%",
-    width: 300, // Adjust as needed
-    height: 300, // Should be the same as width for a perfect circle
-    borderRadius: 125, // Half of width/height for a circular shape
-    borderWidth: 2, // Optional: adds a subtle border
-    borderColor: "#fff", // White border for contrast
-    shadowColor: "#000",
-    shadowOffset: { width: 4, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5, // For Android shadow
+    width: 300,
+    height: 300,
+    resizeMode: 'cover',
+  },
+  button: {
+    backgroundColor: '#1D3D47',
+    padding: 15,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 32
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600'
   },
 });

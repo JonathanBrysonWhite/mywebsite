@@ -5,21 +5,24 @@ import { Button } from "@/components/Button";
 import { Link } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import SkillsSection from "@/components/SkillsSection";
+import FunFactsSection from "@/components/FunFactsSection";
 import { ResumeButton } from "@/components/ResumeDownload"
 import { ContactButton } from "@/components/ui/ContactButton";
 
 export default function AboutMeScreen() {
   return (
-    <ParallaxScrollView 
-    headerBackgroundColor={{light: '#A1CEDC', dark: '#1D3D47'}}
-    headerImage={
-      <LinearGradient
-      colors={['#1D3D47', '#A1CEDC']}
-      style={styles.gradientBackground}
-      >
-      <Image source={require('@/assets/images/headshot.jpg')} style={styles.profileImage}/>
-      </LinearGradient>
-    }>
+    <ParallaxScrollView
+      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerImage={
+        <LinearGradient
+          colors={['#1D3D47', '#A1CEDC']}
+          style={styles.gradientBackground}
+        >
+          <View style={styles.imageContainer}>
+            <Image source={require('@/assets/images/headshot.jpg')} style={styles.profileImage} />
+          </View>
+        </LinearGradient>
+      }>
       {/* Hero Section */}
       <View className="items-center">
         <ThemedText type="title" className="mt-4 text-center">
@@ -42,30 +45,39 @@ export default function AboutMeScreen() {
 
       {/* Skills Section */}
       <ThemedText type="subtitle" style={styles.titleText}>Skills & Technologies</ThemedText>
-      <SkillsSection/>
+      <SkillsSection />
 
       {/* Fun Facts Section */}
-      <View className="mt-8">
-        <ThemedText type="subtitle">Fun Facts</ThemedText>
-        <ThemedText className="text-gray-700 dark:text-gray-300">
-          - I love building cool front-end components 🎨  
-          - I enjoy DevOps automation ⚙️  
-          - Big fan of self-hosting and VPS setups 🚀  
-        </ThemedText>
-      </View>
+      <FunFactsSection />
 
       {/* Call to Action */}
       <View className="mt-8 items-center">
         <View style={styles.contactButtonContainer}>
-          <ContactButton buttonText="📩 Contact Me"/>
+          <ContactButton buttonText="📩 Contact Me" />
         </View>
-        <ResumeButton/>
+        <ResumeButton />
       </View>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  imageContainer: {
+    width: 305,
+    height: 305,
+    borderRadius: '100%',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 8,
+    marginBottom: 8,
+    left: '20%',
+    position: 'absolute'
+  },
   contactButtonContainer: {
     padding: 8,
     alignItems: 'center'
@@ -79,17 +91,10 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   profileImage: {
-    left: '20%',
-    position: 'absolute',
     width: 300,
     height: 300,
-    borderRadius: 150, // Correctly rounding the image
-    borderWidth: 5, // Adding border width for visibility,
-    shadowColor: '#000',
-    shadowOffset: { width: 4, height: 2 },
-    shadowOpacity: 1.0, // Controls the shadow intensity
-    shadowRadius: 5, // Controls the blur radius for iOS
-    elevation: 5, // For Android shadow
-    borderColor: '#fff'
+    borderRadius: '100%',
+    overflow: 'hidden',
+    resizeMode: 'cover',
   }
 })

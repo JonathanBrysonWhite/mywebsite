@@ -11,7 +11,7 @@ type ContactButtonProps = {
 export function ContactButton({buttonText}:ContactButtonProps) {
     const router = useRouter();
     return(
-        <Pressable  style={styles.contactButton}>
+        <Pressable  style={styles.contactButton} onPress={() => router.navigate('/(tabs)/contactme')}>
           <ThemedText style={styles.contactButtonText}> {buttonText}</ThemedText>
         </Pressable>
     )
