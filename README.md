@@ -55,12 +55,10 @@ Join our community of developers creating universal apps.
 #todo - services on front page should link to dedicated services page
 #todo - blog page, with CRM system for blog posts behind auth
 #todo - skill items can link to portfolio items
+#todo - verify domain email, change contact email to include my personal email and contact @ brysonw.net
 
 #blog ideas - how to to recaptcha for this site
 #blog ideas - making of the skills component
 
 #todo remove localhost from google.com/re3captcha/admin
-#todo in ios keyboard should push up ui on text entry
-#todo look into zoho mail api
-#https://www.zoho.com/mail/help/api/post-send-an-email.html
 #look at spf record for brysonw.net

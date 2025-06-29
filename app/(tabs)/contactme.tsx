@@ -24,10 +24,34 @@ export default function ContactMeScreen() {
         }
     }, []);
 
-    const handleVerify = (token: string) => {
+    const handleVerify = async (token: string) => {
         console.log('reCAPTCHA Token:', token);
-        Alert.alert('Verification success', `Token: ${token}`);
-        //send token to backend
+        try {
+            const response = await fetch('/mail', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message,
+                    recaptchaToken: token,
+                }),
+            });
+            if (!response.ok) {
+                const errorText = await response.text();
+                Alert.alert('Error', errorText || 'Failed to send message.');
+                return;
+            }
+            Alert.alert('Thanks!', 'Your message has been sent.');
+            setName('');
+            setEmail('');
+            setMessage('');
+        } catch (err) {
+            console.error(err);
+            Alert.alert('Oops', 'Something went wrong. Please try again.');
+        }
     }
 
     const handleError = (error: string) => {
