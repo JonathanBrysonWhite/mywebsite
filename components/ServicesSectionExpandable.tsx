@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, useColorScheme, TouchableOpacity, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet, useColorScheme, TouchableOpacity, Animated, Easing, useWindowDimensions } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useState, useRef, useEffect } from 'react';
 import { useLocalSearchParams } from 'expo-router';
@@ -30,9 +30,10 @@ export default function ServicesSection() {
   const params = useLocalSearchParams();
   const expandParam = params.expand !== undefined ? Number(params.expand) : null;
   const [expandedIdx, setExpandedIdx] = useState<number | null>(expandParam);
+  const {width: windowWidth} = useWindowDimensions();
   // Animated values for each card
   const CARD_COLLAPSED_HEIGHT = 150;
-  const CARD_EXPANDED_HEIGHT = 210;
+  const CARD_EXPANDED_HEIGHT = windowWidth < 500 ? 300 : 210;
   const CARD_COLLAPSED_WIDTH = '48%';
   const CARD_EXPANDED_WIDTH = '100%';
   const animatedHeights = useRef(services.map(() => new Animated.Value(CARD_COLLAPSED_HEIGHT))).current;

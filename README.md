@@ -50,9 +50,10 @@ Join our community of developers creating universal apps.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 
 
+#todo - fix dark mode
 #todo - replace all alerts w/ toast
 #todo - portfolio, testimonials
-#todo - services on front page should link to dedicated services page
+
 #todo - blog page, with CRM system for blog posts behind auth
 #todo - skill items can link to portfolio items
 #todo - verify domain email, change contact email to include my personal email and contact @ brysonw.net
@@ -62,3 +63,4 @@ Join our community of developers creating universal apps.
 
 #todo remove localhost from google.com/re3captcha/admin
 #look at spf record for brysonw.net
+
