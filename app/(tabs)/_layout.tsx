@@ -1,7 +1,8 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { Platform } from 'react-native';
-
+import { Platform, useWindowDimensions } from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import { Drawer } from 'expo-router/drawer';
 import { HapticTab } from '@/components/HapticTab';
 import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
@@ -10,7 +11,53 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { width } = useWindowDimensions();
 
+  const isSmallScreen = width < 900;
+
+  if (isSmallScreen) {
+    return (
+      <GestureHandlerRootView style={{ flex: 1}}>
+        <Drawer>
+          <Drawer.Screen
+            name="index"
+            options={{
+              title: 'Home',
+              drawerIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+            }}
+          />
+          <Drawer.Screen
+            name="services"
+            options={{
+              title: 'Services',
+              drawerIcon: ({ color }) => <IconSymbol size={28} name="wrench.fill" color={color} />,
+            }}
+          />
+          <Drawer.Screen
+            name="aboutme"
+            options={{
+              title: 'About Me',
+              drawerIcon: ({ color }) => <IconSymbol size={28} name="person.fill" color={color} />,
+            }}
+          />
+          <Drawer.Screen
+            name="resume"
+            options={{
+              title: 'Resume',
+              drawerIcon: ({ color }) => <IconSymbol size={28} name="person.text.rectangle.fill" color={color} />
+            }}
+          />
+          <Drawer.Screen
+            name="contactme"
+            options={{
+              title: 'Contact Me',
+              drawerIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color}/>
+            }}
+          />
+        </Drawer>
+      </GestureHandlerRootView>
+    );
+  }
   return (
     <Tabs
       screenOptions={{
@@ -34,10 +81,10 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="services"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: 'Services',
+          tabBarIcon: ({ color }) => <IconSymbol size={28} name="wrench.fill" color={color} />,
         }}
       />
       <Tabs.Screen

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableOpacity, Linking, Text, View } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, Linking, Text, View, useWindowDimensions } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -15,7 +15,7 @@ export default function HomeScreen() {
       headerImage={
         <LinearGradient
           colors={['#1D3D47', '#A1CEDC']}
-          style={styles.gradientBackground}
+          style={[styles.gradientBackground]}
         >
           <View style={styles.imageContainer}>
             <Image source={require('@/assets/images/bryson-headshot.png')} style={styles.profileImage} />

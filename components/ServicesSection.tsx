@@ -1,5 +1,7 @@
-import { View, Text, StyleSheet, useColorScheme } from 'react-native';
+import { View, Text, StyleSheet, useColorScheme, TouchableOpacity } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+
 type MaterialIconName =
   | 'language'
   | 'smartphone'
@@ -24,21 +26,28 @@ const services: {title: string, icon: MaterialIconName }[] = [
 export default function ServicesSection() {
   const colorScheme = useColorScheme();
   const isDarkMode = colorScheme === 'dark';
+  const router = useRouter();
   return (
     <View style={styles.container}>
       <Text style={[styles.heading, isDarkMode && styles.headingDark]}>💼 Services I Offer</Text>
       <View style={styles.grid}>
         {services.map((service, index) => (
-          <View key={index} 
-          style={[
-            styles.card,
-            isDarkMode ? styles.cardDark : styles.cardLight]}>
-            <MaterialIcons 
-                name={service.icon} 
-                size={32} 
-                color={isDarkMode ? "#90CAF9" : "#1D3D47"} />
+          <TouchableOpacity
+            key={index}
+            activeOpacity={0.85}
+            onPress={() => router.push({ pathname: '/services', params: { expand: index } })}
+            style={[
+              styles.card,
+              isDarkMode ? styles.cardDark : styles.cardLight
+            ]}
+          >
+            <MaterialIcons
+              name={service.icon}
+              size={32}
+              color={isDarkMode ? '#90CAF9' : '#1D3D47'}
+            />
             <Text style={[styles.cardText, isDarkMode && styles.cardTextDark]}>{service.title}</Text>
-          </View>
+          </TouchableOpacity>
         ))}
       </View>
     </View>

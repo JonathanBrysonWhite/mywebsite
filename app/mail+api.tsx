@@ -29,7 +29,7 @@ export async function POST(request: Request) {
     try {
         const resend = new Resend(RESEND_API_KEY || '');
         const {data, error} = await resend.emails.send({
-            from: `Test <onboarding@resend.dev>`,
+            from: `Test <admin@brysonw.net>`,
             to: 'admin@brysonw.net',
             subject: `Contact Form Submission from ${body.name}`,
             html: '<p>You have received a new contact form submission:</p>' +

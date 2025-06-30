@@ -96,7 +96,11 @@ export default function ContactMeScreen() {
                     colors={['#1D3D47', '#A1CEDC']}
                     style={styles.gradientBackground}
                 >
-
+                    <MaterialCommunityIcons
+                        name="email-outline"
+                        size={250}
+                        color="#fff"
+                        style={{ left: '20%', marginTop: 20 }}/>
                 </LinearGradient>
             }>
             <View style={styles.container}>
@@ -184,7 +188,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        padding: 20,
+        padding: 0,
         backgroundColor: '#fff'
     },
     heading: {
