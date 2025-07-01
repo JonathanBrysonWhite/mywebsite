@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
   },
   cardDark: {
     backgroundColor: '#23272B', // subtle dark grey for dark mode
-    shadowColor: 'transparent',
+    shadowColor: 'transparent', // Remove shadow
+    borderWidth: 0, // Remove border
+    elevation: 0, // Remove shadow
   },
   cardText: {
     marginTop: 8,
@@ -63,7 +65,8 @@ const styles = StyleSheet.create({
     opacity: 0.85,
   },
   cardTextDark: {
-    color: '#E3F2FD',
+    color: '#E3F2FD', // Lighter text for dark mode
     opacity: 0.85,
+    fontWeight: '400', // Remove bold for info look
   },
 });

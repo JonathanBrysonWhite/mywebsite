@@ -8,6 +8,8 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { Pressable } from 'react-native-gesture-handler';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -18,7 +20,15 @@ export default function TabLayout() {
   if (isSmallScreen) {
     return (
       <GestureHandlerRootView style={{ flex: 1}}>
-        <Drawer>
+        <Drawer
+      screenOptions={({ navigation }) => ({
+        headerLeft: () => (
+          <Pressable onPress={() => navigation.toggleDrawer()} style={{ marginLeft: 10 }}>
+            <Ionicons name="menu" size={24} color={colorScheme === 'dark' ? '#fff' : '#000'} />
+          </Pressable>
+        ),
+      })}
+        >
           <Drawer.Screen
             name="index"
             options={{

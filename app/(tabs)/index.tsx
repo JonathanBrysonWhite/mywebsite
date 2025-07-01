@@ -1,4 +1,4 @@
-import { Image, StyleSheet, TouchableOpacity, Linking, Text, View, useWindowDimensions } from 'react-native';
+import { Image, StyleSheet, TouchableOpacity, Linking, Text, View, useWindowDimensions, useColorScheme } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -9,6 +9,8 @@ import { ContactButton } from '@/components/ui/ContactButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function HomeScreen() {
+  const colorScheme = useColorScheme();
+  const isDarkMode = colorScheme === 'dark';
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -47,7 +49,7 @@ export default function HomeScreen() {
       </ThemedView>
 
       {/* Contact CTA */}
-      <ThemedView style={styles.ctaContainer}>
+      <ThemedView style={[styles.ctaContainer,  { backgroundColor: isDarkMode ? '#1E1E1E' : '#A1CEDC' }]}>
         <ThemedText type="subtitle">📩 Let's Work Together</ThemedText>
         <ThemedText>Contact me for a free consultation.</ThemedText>
         <ContactButton buttonText="Get in Touch" />
@@ -101,7 +103,6 @@ const styles = StyleSheet.create({
   ctaContainer: {
     padding: 16,
     alignItems: 'center',
-    backgroundColor: '#A1CEDC',
     borderRadius: 8,
     margin: 16,
   },

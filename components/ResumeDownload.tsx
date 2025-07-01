@@ -1,23 +1,24 @@
 import { Platform, Pressable, Text, Linking, Alert } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 
-const GOOGLE_DRIVE_DOWNLOAD_URL = process.env.EXPO_PUBLIC_RESUME_DOWNLOAD_URL!;
+const LOCAL_RESUME_PATH_WEB = '/my-resume.pdf';
+const LOCAL_RESUME_PATH_MOBILE = 'file:///android_asset/my-resume.pdf';
 
 export function ResumeButton() {
   const handlePress = async () => {
     try {
       if (Platform.OS === 'web') {
-        // On web, simulate a link click
+        // On web, simulate a link click to local asset
         const link = document.createElement('a');
-        link.href = GOOGLE_DRIVE_DOWNLOAD_URL;
-        link.download = 'resume.pdf';
+        link.href = LOCAL_RESUME_PATH_WEB;
+        link.download = 'resume-bryson-white.pdf';
         link.target = '_blank';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
       } else {
-        // On mobile, open the link in browser
-        await WebBrowser.openBrowserAsync(GOOGLE_DRIVE_DOWNLOAD_URL);
+        // On mobile, open the local PDF in browser or PDF viewer
+        await WebBrowser.openBrowserAsync(LOCAL_RESUME_PATH_MOBILE);
       }
     } catch (error) {
       Alert.alert("Error", "Unable to download resume.");

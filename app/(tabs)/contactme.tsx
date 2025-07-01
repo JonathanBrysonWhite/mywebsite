@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Linking, Platform, } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert, Linking, Platform, useColorScheme } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -16,7 +16,8 @@ export default function ContactMeScreen() {
     const [message, setMessage] = useState('');
     const [submitting, setSubmitting] = useState(false);
     const recaptchaRef = useRef<GoogleRecaptchaRefAttributes>(null);
-
+    const colorScheme = useColorScheme();
+    const isDarkMode = colorScheme === 'dark';
 
     useEffect(() => {
         if (Platform.OS === 'web') {
@@ -59,7 +60,6 @@ export default function ContactMeScreen() {
         Alert.alert('Verification Error', error);
     };
 
-
     const handleSend = async () => {
         try {
             setSubmitting(true);
@@ -74,7 +74,6 @@ export default function ContactMeScreen() {
             } else {
                 Alert.alert('Token Request Failed', 'No token received');
             }
-
 
             setSubmitting(false);
             setName('');
@@ -93,7 +92,7 @@ export default function ContactMeScreen() {
             headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
             headerImage={
                 <LinearGradient
-                    colors={['#1D3D47', '#A1CEDC']}
+                    colors={isDarkMode ? ['#1D3D47', '#223344'] : ['#1D3D47', '#A1CEDC']}
                     style={styles.gradientBackground}
                 >
                     <MaterialCommunityIcons
@@ -103,28 +102,31 @@ export default function ContactMeScreen() {
                         style={{ left: '20%', marginTop: 20 }}/>
                 </LinearGradient>
             }>
-            <View style={styles.container}>
-                <Text style={styles.heading}>📬 Let's Connect</Text>
-                <Text style={styles.subtext}>
+            <View style={[styles.container, isDarkMode && styles.containerDark]}>
+                <Text style={[styles.heading, isDarkMode && styles.headingDark]}>📬 Let's Connect</Text>
+                <Text style={[styles.subtext, isDarkMode && styles.subtextDark]}>
                     Have a project idea or just want to chat? Fill out the form below or connect with me on social.
                 </Text>
 
                 <View style={styles.form}>
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, isDarkMode && styles.inputDark]}
                         placeholder="Name"
+                        placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
                         value={name} onChangeText={setName}
                     />
                     <TextInput
-                        style={styles.input}
+                        style={[styles.input, isDarkMode && styles.inputDark]}
                         placeholder="Email"
+                        placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
                         keyboardType="email-address"
                         autoCapitalize="none"
                         value={email} onChangeText={setEmail}
                     />
                     <TextInput
-                        style={[styles.input, styles.messageInput]}
+                        style={[styles.input, styles.messageInput, isDarkMode && styles.inputDark]}
                         placeholder="Message"
+                        placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
                         multiline
                         numberOfLines={4}
                         value={message}
@@ -150,7 +152,7 @@ export default function ContactMeScreen() {
                     >
                         <Text style={styles.buttonText}>{submitting ? 'Sending...' : 'Send Message'}</Text>
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 12, color: '#888', marginTop: 16, textAlign: 'center' }}>
+                    <Text style={{ fontSize: 12, color: isDarkMode ? '#aaa' : '#888', marginTop: 16, textAlign: 'center' }}>
                         This site is protected by reCAPTCHA and the Google{' '}
                         <Text onPress={() => Linking.openURL('https://policies.google.com/privacy')} style={{ color: '#0077B5' }}>
                             Privacy Policy
@@ -163,13 +165,13 @@ export default function ContactMeScreen() {
                     </Text>
                 </View>
 
-                <Text style={styles.socialHeading}>🔗 Connect With Me</Text>
+                <Text style={[styles.socialHeading, isDarkMode && styles.headingDark]}>🔗 Connect With Me</Text>
                 <View style={styles.socialRow}>
                     <TouchableOpacity onPress={() => Linking.openURL('https://www.linkedin.com/in/bryson-white-7b0586198/')}>
                         <MaterialCommunityIcons name="linkedin" size={32} color="#0077B5" style={styles.socialIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => Linking.openURL('https://github.com/JonathanBrysonWhite')}>
-                        <MaterialCommunityIcons name="github" size={32} color="#333" style={styles.socialIcon} />
+                        <MaterialCommunityIcons name="github" size={32} color={isDarkMode ? '#eee' : '#333'} style={styles.socialIcon} />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => Linking.openURL('mailto:contact@brysonw.net')}>
                         <MaterialCommunityIcons name="email" size={32} color="#D44638" style={styles.socialIcon} />
@@ -191,16 +193,25 @@ const styles = StyleSheet.create({
         padding: 0,
         backgroundColor: '#fff'
     },
+    containerDark: {
+        backgroundColor: '#181C20',
+    },
     heading: {
         fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 10,
         color: '#1D3D47'
     },
+    headingDark: {
+        color: '#90CAF9',
+    },
     subtext: {
         fontSize: 16,
         marginBottom: 20,
         color: '#4F5A65'
+    },
+    subtextDark: {
+        color: '#B0B8C1',
     },
     form: {
         marginBottom: 30
@@ -212,6 +223,13 @@ const styles = StyleSheet.create({
         padding: 12,
         marginBottom: 15,
         fontSize: 16,
+        color: '#1D3D47',
+        backgroundColor: '#fff',
+    },
+    inputDark: {
+        borderColor: '#333',
+        color: '#E3F2FD',
+        backgroundColor: '#23272B',
     },
     messageInput: {
         height: 120,
