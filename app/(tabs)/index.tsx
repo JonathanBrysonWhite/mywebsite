@@ -7,10 +7,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import ServicesSection from '@/components/ServicesSection';
 import { ContactButton } from '@/components/ui/ContactButton';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function HomeScreen() {
   const colorScheme = useColorScheme();
   const isDarkMode = colorScheme === 'dark';
+  const router = useRouter();
+  const { width } = useWindowDimensions();
+  const isMobile = width < 900;
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -40,16 +46,27 @@ export default function HomeScreen() {
       {/* Portfolio Preview */}
       <ThemedView style={styles.section}>
         <ThemedText type="subtitle">🚀 My Portfolio</ThemedText>
-        <TouchableOpacity
-          style={[styles.button]}
-          onPress={() => Linking.openURL('https://github.com/JonathanBrysonWhite')}
-        >
-          <Text style={styles.buttonText}>Check Out My Github! </Text>
-        </TouchableOpacity>
+        <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 16, justifyContent: 'center' }}>
+          <TouchableOpacity
+            style={[styles.button, !isMobile && { width: 240 }]}
+            onPress={() => router.push('/portfolio')}
+          >
+            <Text style={styles.buttonText}>💼 View My Portfolio</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, !isMobile && { width: 240 }]}
+            onPress={() => Linking.openURL('https://github.com/JonathanBrysonWhite')}
+          >
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <MaterialCommunityIcons name="github" size={24} />
+              <Text style={styles.buttonText}> Check Out My GitHub</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </ThemedView>
 
       {/* Contact CTA */}
-      <ThemedView style={[styles.ctaContainer,  { backgroundColor: isDarkMode ? '#1E1E1E' : '#A1CEDC' }]}>
+      <ThemedView style={[styles.ctaContainer, { backgroundColor: isDarkMode ? '#1E1E1E' : '#A1CEDC' }]}>
         <ThemedText type="subtitle">📩 Let's Work Together</ThemedText>
         <ThemedText>Contact me for a free consultation.</ThemedText>
         <ContactButton buttonText="Get in Touch" />
@@ -112,15 +129,22 @@ const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   button: {
+    marginTop: 8,
     backgroundColor: '#1D3D47',
-    padding: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-    marginTop: 32
+    padding: 10,
+    borderRadius: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 4, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    width: 240,
   },
   buttonText: {
-    color: '#fff',
+    color: '#FFF',
+    fontWeight: 'bold',
     fontSize: 16,
-    fontWeight: '600'
+    marginLeft: 'auto',
+    marginRight: 'auto'
   },
 });
+  

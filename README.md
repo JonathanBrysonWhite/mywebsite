@@ -54,6 +54,8 @@ Join our community of developers creating universal apps.
 #todo - replace all alerts w/ toast
 #todo - portfolio, testimonials
 
+#todo - add github pipeline integration
+
 #todo - blog page, with CRM system for blog posts behind auth
 #todo - skill items can link to portfolio items
 #todo - verify domain email, change contact email to include my personal email and contact @ brysonw.net
@@ -63,4 +65,6 @@ Join our community of developers creating universal apps.
 
 #todo remove localhost from google.com/re3captcha/admin
 #look at spf record for brysonw.net
+
+#todo - file storage service for pdfs
 
