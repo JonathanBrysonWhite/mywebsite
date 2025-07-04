@@ -32,11 +32,20 @@ const portfolioEntries: PortfolioEntry[] = [
     },
     {
         type: 'front-end',
+        title: 'Desert Hawk Aviation',
+        description: 'A professional website for a flight school, featuring a modern design and responsive layout. Built with Next.js and React, this site showcases the school\'s services and experience. I also secured a domain name and set up a cost-effective hosting solution for the client. Additionally I set up their LinkedIn and Instagram.',
+        screenshot: require('@/assets/images/desert-hawk-aviation.png'),
+        techStack: ['React Native', 'TypeScript', 'NextJS', 'Docker', 'Domain Name Registration', 'Web Hosting'],
+        testimonials: ['"We needed a web presence to drive marketing towards our flight school. Bryson custom built a professional website and has kept it up and secure on the internet. He also handled our social media accounts to boot! I highly recommend him for any of your web needs." \n- Tom Perkins, President, Desert Hawk Aviation'],
+        link: 'https://deserthawkaviation.com'
+    },
+    {
+        type: 'front-end',
         title: 'Daily Chits',
         description: 'A fun game inspired by wordle, where players guess a daily board game given a set of images. Optimized for web and mobile, this app features tracking of user scores and daily challenges.',
         screenshot: require('@/assets/images/daily-chits.png'),
         techStack: ['React', 'TypeScript', 'NextJS', 'Docker'],
-        testimonials: ['"Bryson did a knock out job writing this website, from design to deployment. He helped me flesh out my ideas and made them a reality." - Daily Chits Founder'],
+        testimonials: ['"Bryson did a knock out job writing this website, from design to deployment. He helped me flesh out my ideas and made them a reality." \n- Daily Chits Founder'],
         link: null //todo make this link to the live site
     },
     {
@@ -45,7 +54,7 @@ const portfolioEntries: PortfolioEntry[] = [
         description: 'A private content management system architected for a small businesses to schedule content to be posted on their website. Secured with Auth0 and hosted on the cloud, this app allows businesses to schedule and manage their content without needing a developer.',
         screenshot: require('@/assets/images/bg-crm.png'),
         techStack: ['React Native', 'JavaScript', 'NextJS', 'Auth0'],
-        testimonials: ['"I found that I was spending way too much time putting content together for my website. Bryson`s CMS allowed me to line up content when I had time, and then it would magically appear on my website right when I wanted it!" - Brandon Stangl, founder of Pip and Dagger'],
+        testimonials: ['"I found that I was spending way too much time putting content together for my website. Bryson`s CMS allowed me to line up content when I had time, and then it would magically appear on my website right when I wanted it!" \n- Brandon Stangl, founder of Pip and Dagger'],
         link: null
     },
     {
@@ -62,9 +71,36 @@ const portfolioEntries: PortfolioEntry[] = [
         title: 'OAuth 2.0 Web API',
         description: 'A secure REST API that implements OAuth 2.0 for authentication and authorization. This API can be used to protect resources and manage user access across multiple applications. It is designed to be flexible and can be integrated with various front-end and back-end technologies.',
         screenshot: require('@/assets/images/oauth.webp'),
-        techStack: ['C#', 'Postgres', '.NET 9', 'OAuth 2.0'],
+        techStack: ['C#', 'Postgres', '.NET 8', 'OAuth 2.0'],
         testimonials: [],
         link: null
+    },
+    {
+        type: 'back-end',
+        title: 'Server Scalability',
+        description: 'As a software engineer at GlobalMed, I was responsible for ensuring our applications were highly available and could scale to handle thousands of concurrent users. I implemented load balancing, caching strategies, and optimized database queries to improve performance and reliability.',
+        screenshot: require('@/assets/images/scalability.png'),
+        techStack: ['C#', 'Redis', '.NET 8', 'SQL Server', 'Docker'],
+        testimonials: [],
+        link: null
+    },
+        {
+        type: 'back-end',
+        title: 'Electronic Healthcare Record Integration',
+        description: 'As a software engineer at GlobalMed, I worked on integrating our telehealth platform with various Electronic Healthcare Record (EHR) systems. This involved developing APIs to securely exchange patient data, ensuring compliance with HIPAA regulations, and providing a seamless user experience for healthcare providers.',
+        screenshot: require('@/assets/images/ehr.webp'),
+        techStack: ['C#', 'API\'s', '.NET 8', 'Mongo DB', 'Docker', 'Azure'],
+        testimonials: [],
+        link: null
+    },
+    {
+        type: 'tech-support',
+        title: 'Stillwater Farm Retreat Website and IT Support',
+        description: 'Assisted StillWater Farm Retreat with building a website to market their retreat center. Set up domain registration, hosting, and email services. Educated owner on how to build and manage the website',
+        screenshot: require('@/assets/images/stillwater-farm-retreat.png'),
+        techStack: ['SquareSpace', 'Domain Registration', 'Web Hosting'],
+        testimonials: ['"I always wanted to build my own website, but it seemed way too complicated. Bryson built the website in front of my very eyes, educating me on how I could do it myself in the future. He was such a blessing to work with, and now I can run my own website!"\n- Stephanie Shockley, Owner and Founder'],
+        link: 'https://stillwaterfarmretreat.com'
     },
     {
         type: 'tech-support',
@@ -72,7 +108,7 @@ const portfolioEntries: PortfolioEntry[] = [
         description: 'I migrated Allegro Music`s point of sale system from on-premesis to the cloud, enabling the owner to manage the same inventory from multiple locations. Helped resolve issues with cashier workstations, advising owner on the appropriate computers for his use case. Resolved issues with internet connectivity.',
         screenshot: require('@/assets/images/allegro-music.jpg'),
         techStack: ['Windows', 'Azure', 'Point of Sale'],
-        testimonials: ['"Bryson came in and saved us a lot of headache and a lot of money. Buying a new license for our POS would cost thousands, but Bryson`s cloud solution was easy and effective. His knowledge about a wide range of tech topics helped us resolve several other issues" -Jim, Manager of Allegro Music'],
+        testimonials: ['"Bryson came in and saved us a lot of headache and a lot of money. Buying a new license for our POS would cost thousands, but Bryson`s cloud solution was easy and effective. His knowledge about a wide range of tech topics helped us resolve several other issues" \n-Jim, Manager of Allegro Music'],
         link: null
     },
     {
@@ -126,7 +162,7 @@ export default function PortfolioScreen() {
                 {(['all', 'front-end', 'back-end', 'tech-support'] as const).map(type => (
                     <TouchableOpacity
                         key={type}
-                        style={[styles.filterButton, filter === type && styles.filterButtonActive, getCardTypeStyle(type as PortfolioType), {borderLeftWidth: 5}]}
+                        style={[styles.filterButton, filter === type && styles.filterButtonActive, getCardTypeStyle(type as PortfolioType), { borderLeftWidth: 5 }]}
                         onPress={() => setFilter(type)}
                     >
                         <Text style={[styles.filterButtonText, { color: filter === type ? '#fff' : '#1D3D47', }]}>{type === 'all' ? 'All' : typeLabels[type as PortfolioType]}</Text>
@@ -149,9 +185,9 @@ export default function PortfolioScreen() {
                         <ThemedText style={styles.cardDesc} darkColor='' lightColor='#4F5A65'>{entry.description}</ThemedText>
                         <View style={[styles.techStackRow, { marginBottom: 8, marginTop: 'auto' }]}>
                             {entry.techStack.map((tech: string, i: number) => (
-                                <View key={i} style={styles.techIconWrap}>
-                                    <Text style={styles.techIconText}>{tech}</Text>
-                                </View>
+                                <ThemedView key={i} style={styles.techIconWrap} lightColor='#E3F2FD' darkColor='#1D3D47'>
+                                    <ThemedText style={styles.techIconText} lightColor='#1D3D47' darkColor='#E3F2FD'>{tech}</ThemedText>
+                                </ThemedView>
                             ))}
                         </View>
                     </ThemedTouchableOpacity>
@@ -159,37 +195,46 @@ export default function PortfolioScreen() {
             </ScrollView>
             <Modal visible={!!modalEntry} animationType="slide" transparent onRequestClose={() => setModalEntry(null)}>
                 <ThemedView style={styles.modalOverlay}>
-                    <ThemedView style={styles.modalContent}>
+                    <ThemedView style={styles.modalContent} lightColor='#fff' darkColor='#23272B'>
                         {modalEntry && (
                             <>
+                                <ThemedText style={styles.modalTitle} lightColor='#1D3D47' darkColor='#fff'>{modalEntry.title}</ThemedText>
                                 <Image source={modalEntry.screenshot} style={styles.modalImage} />
-                                <Text style={styles.modalTitle}>{modalEntry.title}</Text>
-                                <Text style={styles.modalDesc}>{modalEntry.description}</Text>
+                                <ThemedText style={styles.modalDesc} lightColor='#4F5A65' darkColor=''>{modalEntry.description}</ThemedText>
                                 <View style={styles.techStackRow}>
                                     {modalEntry.techStack.map((tech: string, i: number) => (
-                                        <View key={i} style={styles.techIconWrap}>
-                                            <Text style={styles.techIconText}>{tech}</Text>
-                                        </View>
+                                        <ThemedView key={i} style={styles.techIconWrap} lightColor='#E3F2FD' darkColor='#1D3D47'>
+                                            <ThemedText style={styles.techIconText} lightColor='#1D3D47' darkColor='#E3F2FD'>{tech}</ThemedText>
+                                        </ThemedView>
                                     ))}
                                 </View>
                                 {modalEntry.testimonials.length > 0 &&
-                                    <View style={styles.testimonialBox}>
+                                    <ThemedView style={styles.testimonialBox} lightColor='#E3F2FD' darkColor='#1D3D47'>
                                         {modalEntry.testimonials.map((t: string, i: number) => (
-                                            <Text key={i} style={styles.testimonialText}>{t}</Text>
+                                            <ThemedText key={i} style={styles.testimonialText} lightColor='#1D3D47' darkColor='#E3F2FD'>{t}</ThemedText>
                                         ))}
-                                    </View>
+                                    </ThemedView>
                                 }
+
+
                                 {modalEntry.link && (
                                     <ThemedTouchableOpacity
-                                        style={[styles.closeButton, {}]}
+                                        style={[styles.closeButton]}
+                                        lightColor='#1D3D47'
+                                        darkColor='#FFF'
                                         onPress={() => Linking.openURL(modalEntry.link!)}
                                     >
-                                        <Text style={styles.closeButtonText}>View Project</Text>
+                                        <ThemedText lightColor='#fff' darkColor='#1D3D47' style={styles.closeButtonText}>View Project</ThemedText>
                                     </ThemedTouchableOpacity>
                                 )}
-                                <TouchableOpacity style={[styles.closeButton, { backgroundColor: "#EFEFEF" }]} onPress={() => setModalEntry(null)}>
-                                    <Text style={[styles.closeButtonText, { color: "#000" }]}>Close</Text>
-                                </TouchableOpacity>
+                                <ThemedTouchableOpacity 
+                                    style={[styles.closeButton]} 
+                                    onPress={() => setModalEntry(null)}
+                                    lightColor='#EFEFEF'
+                                    darkColor='#1D3D47'
+                                    >
+                                    <ThemedText style={[styles.closeButtonText]} lightColor='#000' darkColor='#fff'>Close</ThemedText>
+                                </ThemedTouchableOpacity>
                             </>
                         )}
                     </ThemedView>
@@ -293,7 +338,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     techIconWrap: {
-        backgroundColor: '#E3F2FD',
         borderRadius: 8,
         paddingHorizontal: 8,
         paddingVertical: 4,
@@ -301,7 +345,6 @@ const styles = StyleSheet.create({
         marginVertical: 2,
     },
     techIconText: {
-        color: '#1D3D47',
         fontWeight: 'bold',
         fontSize: 13,
     },
@@ -310,9 +353,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.5)',
         justifyContent: 'center',
         alignItems: 'center',
+        overflowY: 'auto'
     },
     modalContent: {
-        backgroundColor: '#fff',
         borderRadius: 20,
         padding: 24,
         width: 340,
@@ -334,17 +377,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginBottom: 8,
-        color: '#1D3D47',
         textAlign: 'center',
     },
     modalDesc: {
         fontSize: 16,
-        color: '#4F5A65',
         marginBottom: 10,
         textAlign: 'center',
     },
     testimonialBox: {
-        backgroundColor: '#E3F2FD',
         borderRadius: 10,
         padding: 12,
         marginTop: 10,
@@ -352,13 +392,11 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     testimonialText: {
-        color: '#1D3D47',
         fontStyle: 'italic',
         fontSize: 15,
         textAlign: 'center',
     },
     closeButton: {
-        backgroundColor: '#1D3D47',
         borderRadius: 8,
         paddingVertical: 10,
         paddingHorizontal: 32,
@@ -367,7 +405,6 @@ const styles = StyleSheet.create({
         alignContent: 'center'
     },
     closeButtonText: {
-        color: '#fff',
         fontWeight: 'bold',
         fontSize: 16,
         textAlign: 'center',
