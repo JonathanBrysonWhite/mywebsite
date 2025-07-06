@@ -38,6 +38,13 @@ You can start developing by editing the files inside the **app** directory. This
    docker run -p 80:80 --env-file .env my-website:local
    ```
 
+   building for arm64...
+   ```bash
+   docker buildx build --platform linux/arm64 -t bwhite14/bwhiterepo:my-website --push .
+   ```
+
+
+
 #todo - replace all alerts w/ toast
 
 #todo - add github pipeline integration

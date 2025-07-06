@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  web:
+    image: bwhite14/bwhiterepo:my-website
+    container_name: expo_web_server
+    expose:
+      - "3000"
+    restart: unless-stopped
+    env_file: ".env"
+
+  caddy:
+    image: caddy:alpine
+    container_name: caddy_proxy
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+
+volumes:
+  caddy_data:
+  caddy_config:

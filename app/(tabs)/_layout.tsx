@@ -21,13 +21,10 @@ export default function TabLayout() {
     return (
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Drawer
-          screenOptions={({ navigation }) => ({
-            headerLeft: () => (
-              <Pressable onPress={() => navigation.toggleDrawer()} style={{ marginLeft: 10 }}>
-                <Ionicons name="menu" size={24} color={colorScheme === 'dark' ? '#fff' : '#000'} />
-              </Pressable>
-            ),
-          })}
+          key={colorScheme} // Force remount on color scheme change
+          screenOptions={{
+            headerTintColor: colorScheme === 'dark' ? '#fff' : '#000',
+          }}
         >
           <Drawer.Screen
             name="index"

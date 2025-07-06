@@ -232,10 +232,12 @@ const styles = StyleSheet.create({
   },
   cardText: {
     marginTop: 0,
-    fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
     color: '#1D3D47',
+    width: 'auto',
+    flexShrink: 1,
+    flex: 1,
   },
   expandedCardText: {
     fontSize: 20,

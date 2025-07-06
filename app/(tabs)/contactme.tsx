@@ -26,7 +26,6 @@ export default function ContactMeScreen() {
     }, []);
 
     const handleVerify = async (token: string) => {
-        console.log('reCAPTCHA Token:', token);
         try {
             const response = await fetch('/mail', {
                 method: 'POST',
