@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import ReCaptcha, { GoogleRecaptchaRefAttributes } from '@valture/react-native-recaptcha-v3';
 import { getRecaptchaToken } from '../utils/getRecaptchaToken';
 import { injectRecaptchaBadgeStyles } from '../utils/injectGlobalStyles';
+import { Snackbar } from 'react-native-paper';
 
 const SITE_KEY = process.env.EXPO_PUBLIC_GOOGLE_RECAPTCHA_SITE_KEY ?? "";
 const DOMAIN = process.env.EXPO_PUBLIC_SITE_DNS ?? "";
@@ -15,6 +16,8 @@ export default function ContactMeScreen() {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [submitting, setSubmitting] = useState(false);
+    const [successSnackbarVisible, setSuccessSnackbarVisible] = useState(false);
+    const [failureSnackbarVisible, setFailureSnackbarVisible] = useState(false);
     const recaptchaRef = useRef<GoogleRecaptchaRefAttributes>(null);
     const colorScheme = useColorScheme();
     const isDarkMode = colorScheme === 'dark';
@@ -24,6 +27,10 @@ export default function ContactMeScreen() {
             injectRecaptchaBadgeStyles();
         }
     }, []);
+
+
+    const onDismissSuccessSnackbar = () => { setSuccessSnackbarVisible(false) };
+    const onDismissFailureSnackbar = () => { setFailureSnackbarVisible(false) };
 
     const handleVerify = async (token: string) => {
         try {
@@ -79,105 +86,164 @@ export default function ContactMeScreen() {
             setEmail('');
             setMessage('');
             Alert.alert('Thanks!', 'Your message has been sent.');
+            setSuccessSnackbarVisible(true);
         } catch (err) {
             console.error(err);
             setSubmitting(false);
             Alert.alert('Oops', 'Something went wrong. Please try again.');
+            setFailureSnackbarVisible(true);
         }
     }
 
     return (
-        <ParallaxScrollView
-            headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-            headerImage={
-                <LinearGradient
-                    colors={isDarkMode ? ['#1D3D47', '#223344'] : ['#1D3D47', '#A1CEDC']}
-                    style={styles.gradientBackground}
-                >
-                    <MaterialCommunityIcons
-                        name="email-outline"
-                        size={250}
-                        color="#fff"
-                        style={{ left: '20%', marginTop: 20 }}/>
-                </LinearGradient>
-            }>
-            <View style={[styles.container, isDarkMode && styles.containerDark]}>
-                <Text style={[styles.heading, isDarkMode && styles.headingDark]}>📬 Let's Connect</Text>
-                <Text style={[styles.subtext, isDarkMode && styles.subtextDark]}>
-                    Have a project idea or just want to chat? Fill out the form below or connect with me on social.
-                </Text>
-
-                <View style={styles.form}>
-                    <TextInput
-                        style={[styles.input, isDarkMode && styles.inputDark]}
-                        placeholder="Name"
-                        placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
-                        value={name} onChangeText={setName}
-                    />
-                    <TextInput
-                        style={[styles.input, isDarkMode && styles.inputDark]}
-                        placeholder="Email"
-                        placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        value={email} onChangeText={setEmail}
-                    />
-                    <TextInput
-                        style={[styles.input, styles.messageInput, isDarkMode && styles.inputDark]}
-                        placeholder="Message"
-                        placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
-                        multiline
-                        numberOfLines={4}
-                        value={message}
-                        onChangeText={setMessage}
-                    />
-                    {Platform.OS === 'android' &&
-
-                        <ReCaptcha
-                            ref={recaptchaRef}
-                            siteKey={SITE_KEY}
-                            baseUrl={DOMAIN}
-                            action="homepage"
-                            onVerify={handleVerify}
-                            onError={handleError}
-                        />
-                    }
-
-
-                    <TouchableOpacity
-                        style={[styles.button, submitting && styles.buttonDisabled]}
-                        onPress={handleSend}
-                        disabled={submitting}
+        <>
+            <ParallaxScrollView
+                headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+                headerImage={
+                    <LinearGradient
+                        colors={isDarkMode ? ['#1D3D47', '#223344'] : ['#1D3D47', '#A1CEDC']}
+                        style={styles.gradientBackground}
                     >
-                        <Text style={styles.buttonText}>{submitting ? 'Sending...' : 'Send Message'}</Text>
-                    </TouchableOpacity>
-                    <Text style={{ fontSize: 12, color: isDarkMode ? '#aaa' : '#888', marginTop: 16, textAlign: 'center' }}>
-                        This site is protected by reCAPTCHA and the Google{' '}
-                        <Text onPress={() => Linking.openURL('https://policies.google.com/privacy')} style={{ color: '#0077B5' }}>
-                            Privacy Policy
-                        </Text>{' '}
-                        and{' '}
-                        <Text onPress={() => Linking.openURL('https://policies.google.com/terms')} style={{ color: '#0077B5' }}>
-                            Terms of Service
-                        </Text>{' '}
-                        apply.
+                        <MaterialCommunityIcons
+                            name="email-outline"
+                            size={250}
+                            color="#fff"
+                            style={{ left: '20%', marginTop: 20 }} />
+                    </LinearGradient>
+                }>
+                <View style={[styles.container, isDarkMode && styles.containerDark]}>
+                    <Text style={[styles.heading, isDarkMode && styles.headingDark]}>📬 Let's Connect</Text>
+                    <Text style={[styles.subtext, isDarkMode && styles.subtextDark]}>
+                        Have a project idea or just want to chat? Fill out the form below or connect with me on social.
                     </Text>
-                </View>
 
-                <Text style={[styles.socialHeading, isDarkMode && styles.headingDark]}>🔗 Connect With Me</Text>
-                <View style={styles.socialRow}>
-                    <TouchableOpacity onPress={() => Linking.openURL('https://www.linkedin.com/in/bryson-white-7b0586198/')}>
-                        <MaterialCommunityIcons name="linkedin" size={32} color="#0077B5" style={styles.socialIcon} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => Linking.openURL('https://github.com/JonathanBrysonWhite')}>
-                        <MaterialCommunityIcons name="github" size={32} color={isDarkMode ? '#eee' : '#333'} style={styles.socialIcon} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => Linking.openURL('mailto:contact@brysonw.net')}>
-                        <MaterialCommunityIcons name="email" size={32} color="#D44638" style={styles.socialIcon} />
-                    </TouchableOpacity>
+                    <View style={styles.form}>
+                        <TextInput
+                            style={[styles.input, isDarkMode && styles.inputDark]}
+                            placeholder="Name"
+                            placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+                            value={name} onChangeText={setName}
+                        />
+                        <TextInput
+                            style={[styles.input, isDarkMode && styles.inputDark]}
+                            placeholder="Email"
+                            placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            value={email} onChangeText={setEmail}
+                        />
+                        <TextInput
+                            style={[styles.input, styles.messageInput, isDarkMode && styles.inputDark]}
+                            placeholder="Message"
+                            placeholderTextColor={isDarkMode ? '#aaa' : '#888'}
+                            multiline
+                            numberOfLines={4}
+                            value={message}
+                            onChangeText={setMessage}
+                        />
+                        {Platform.OS === 'android' &&
+
+                            <ReCaptcha
+                                ref={recaptchaRef}
+                                siteKey={SITE_KEY}
+                                baseUrl={DOMAIN}
+                                action="homepage"
+                                onVerify={handleVerify}
+                                onError={handleError}
+                            />
+                        }
+
+
+                        <TouchableOpacity
+                            style={[styles.button, submitting && styles.buttonDisabled]}
+                            onPress={handleSend}
+                            disabled={submitting}
+                        >
+                            <Text style={styles.buttonText}>{submitting ? 'Sending...' : 'Send Message'}</Text>
+                        </TouchableOpacity>
+                        <Text style={{ fontSize: 12, color: isDarkMode ? '#aaa' : '#888', marginTop: 16, textAlign: 'center' }}>
+                            This site is protected by reCAPTCHA and the Google{' '}
+                            <Text onPress={() => Linking.openURL('https://policies.google.com/privacy')} style={{ color: '#0077B5' }}>
+                                Privacy Policy
+                            </Text>{' '}
+                            and{' '}
+                            <Text onPress={() => Linking.openURL('https://policies.google.com/terms')} style={{ color: '#0077B5' }}>
+                                Terms of Service
+                            </Text>{' '}
+                            apply.
+                        </Text>
+                    </View>
+
+                    <Text style={[styles.socialHeading, isDarkMode && styles.headingDark]}>🔗 Connect With Me</Text>
+                    <View style={styles.socialRow}>
+                        <TouchableOpacity onPress={() => Linking.openURL('https://www.linkedin.com/in/bryson-white-7b0586198/')}>
+                            <MaterialCommunityIcons name="linkedin" size={32} color="#0077B5" style={styles.socialIcon} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Linking.openURL('https://github.com/JonathanBrysonWhite')}>
+                            <MaterialCommunityIcons name="github" size={32} color={isDarkMode ? '#eee' : '#333'} style={styles.socialIcon} />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => Linking.openURL('mailto:contact@brysonw.net')}>
+                            <MaterialCommunityIcons name="email" size={32} color="#D44638" style={styles.socialIcon} />
+                        </TouchableOpacity>
+                    </View>
                 </View>
-            </View>
-        </ParallaxScrollView>
+            </ParallaxScrollView>
+            <Snackbar
+                visible={successSnackbarVisible}
+                onDismiss={onDismissSuccessSnackbar}
+                duration={3000}
+                style={{
+                    backgroundColor: 'green',
+                    width: 375,
+                    alignSelf: 'center',
+                    bottom: 30,
+                    position: 'absolute',
+                    borderRadius: 8
+                }}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <MaterialCommunityIcons
+                        name="check"
+                        size={40}
+                        color="#fff"
+                        style={{ marginRight: 8 }}
+                    />
+
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, color: '#fff' }}>
+                            Your message has been sent successfully!
+                        </Text>
+                    </View>
+                </View>
+            </Snackbar>
+            <Snackbar
+                visible={failureSnackbarVisible}
+                onDismiss={onDismissFailureSnackbar}
+                duration={3000}
+                style={{
+                    backgroundColor: 'red',
+                    width: 375,
+                    alignSelf: 'center',
+                    bottom: 30,
+                    position: 'absolute',
+                    borderRadius: 8
+                }}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <MaterialCommunityIcons
+                        name="alert-circle"
+                        size={40}
+                        color="#fff"
+                        style={{ marginRight: 8 }}
+                    />
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <Text style={{ fontSize: 18, color: '#fff' }}>
+                            Oops! Something went wrong. Please try again.
+                        </Text>
+                    </View>
+                </View>
+            </Snackbar>
+        </>
     );
 }
 

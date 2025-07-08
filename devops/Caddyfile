@@ -1,5 +1,6 @@
 brysonw.net {
     encode gzip
+    reverse_proxy /webhook http://172.17.0.1:5000
     reverse_proxy web:3000
 
     # Aggressively cache static assets
@@ -18,4 +19,5 @@ brysonw.net {
         X-Frame-Options "SAMEORIGIN"
         Referrer-Policy "strict-origin-when-cross-origin"
     }
+
 }
