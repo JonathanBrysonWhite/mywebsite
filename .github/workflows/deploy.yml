@@ -33,9 +33,9 @@ jobs:
       - name: Trigger app server webhook
         env:
           WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
-          PAYLOAD: '{"event": "deploy"}'
+          PAYLOAD: '{"event": "push"}'
         run: |
-          SIGNATURE=$(echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$SECRET" | sed 's/^.* //')
+          SIGNATURE=$(echo -n "$PAYLOAD" | openssl dgst -sha256 -hmac "$WEBHOOK_SECRET" | sed 's/^.* //')
           curl -X POST "https://brysonw.net/webhook" \
           -H "Content-Type: application/json" \
           -H "X-Hub-Signature-256: sha256=$SIGNATURE" \
@@ -44,7 +44,7 @@ jobs:
       - name: Send email notification
         uses: dawidd6/action-send-mail@v3
         with:
-          server_address: smtp.gmail.com
+          server_address: smtp.zoho.com
           server_port: 465
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
