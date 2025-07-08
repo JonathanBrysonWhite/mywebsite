@@ -30,7 +30,7 @@ RUN npm i -D express compression morgan
 
 # Copy compiled JS server and build outputs
 COPY --from=builder /app/dist /app/dist
-COPY --from=builder /app/server.ts /app/server.ts
+COPY --from=builder /app/devops/server.ts /app/server.ts
 
 
 # Run the compiled server
